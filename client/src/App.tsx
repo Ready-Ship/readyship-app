@@ -1,25 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useState, useEffect } from 'react';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App() {
+// App Css Import
+import './stylesheets/App.css';
+
+// Screens Import
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+// import DashboardScreen from './screens/DashboardScreen';
+
+// Component Imports
+import Navbar from './components/Navbar';
+import Menu from './components/Menu';
+import Overlay from './components/Overlay';
+
+const App:FC = () => {
+  const [menuToggle, setMenuToggle] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  
+  const menuButtonHandler = (e: any) => {
+    e.target.classList.toggle('open');
+    if(!menuToggle) {
+       setMenuToggle(true);
+       e.target.classList.add('open');
+    } else {
+      setMenuToggle(false);
+      e.target.classList.remove('open');
+    }
+  }
+
+  useEffect(() => {
+    const menuBtn = document.querySelector('.hamburger__menu');
+
+    if(menuToggle){
+      menuBtn?.classList.add('open');
+    } else {
+      menuBtn?.classList.remove('open');
+    }
+  }, [menuToggle]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Router>
+      <header>
+        <Menu show={menuToggle} click={() => setMenuToggle(false)} />
+        <Overlay show={menuToggle} click={() => setMenuToggle(false)} />
+        <Navbar click={menuButtonHandler} />
       </header>
-    </div>
+      <main>
+        <Switch>
+          <Route exact path='/'>
+            <LoginScreen />
+          </Route>
+          <Route exact path='/signup'>
+            <SignupScreen />
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   );
 }
 
