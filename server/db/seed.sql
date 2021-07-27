@@ -20,6 +20,6 @@ VALUES
 
 INSERT INTO 
 account_has_task
-(accountid, taskid)
+(accountid, taskid, iscomplete)
 VALUES
-((SELECT id from account LIMIT 1), (SELECT id from task LIMIT 1));
+((SELECT id from account LIMIT 1), (SELECT id from task LIMIT 1), NOW());
