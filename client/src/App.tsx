@@ -29,22 +29,22 @@ const App:FC = () => {
     }
   }
 
-  useEffect(() => {
-    const menuBtn = document.querySelector('.hamburger__menu');
+  // useEffect(() => {
+  //   const menuBtn = document.querySelector('.hamburger__menu');
 
-    if(menuToggle){
-      menuBtn?.classList.add('open');
-    } else {
-      menuBtn?.classList.remove('open');
-    }
-  }, [menuToggle]);
+  //   if(menuToggle){
+  //     menuBtn?.classList.add('open');
+  //   } else {
+  //     menuBtn?.classList.remove('open');
+  //   }
+  // }, [menuToggle]);
 
   return (
     <Router>
       <header>
         <Menu show={menuToggle} click={() => setMenuToggle(false)} />
         <Overlay show={menuToggle} click={() => setMenuToggle(false)} />
-        <Navbar click={menuButtonHandler} />
+        <Navbar open={menuToggle} click={menuButtonHandler} />
       </header>
       <main>
         <Switch>
