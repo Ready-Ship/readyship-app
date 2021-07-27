@@ -9,8 +9,13 @@ const signUpCheck = yup.object({
   name: yup.string().required(),
 });
 
+const loginCheck = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+});
+
 export class AccountController {
-  signUp: RequestHandler = async (req, res, next) => {
+  signup: RequestHandler = async (req, res, next) => {
     try {
       const { email, password, name } = await signUpCheck.validate(req.body);
 
@@ -18,13 +23,40 @@ export class AccountController {
       await Account.create({ email, password: hash, name });
 
       const account = await Account.findByEmail(email);
-      delete account.password;
-      res.locals.account = account;
+      res.locals.account = { ...account };
+      delete res.locals.account.password;
 
       return next();
     } catch (err) {
       next(err);
     }
+  };
+
+  login: RequestHandler = async (req, res, next) => {
+    try {
+      const { email, password } = await loginCheck.validate(req.body);
+
+      const account = await Account.findByEmail(email);
+      if (!account) {
+        throw Error('no account with email found');
+      }
+
+      if (!(await bcrypt.compare(password, account.password))) {
+        throw Error('invalid password');
+      }
+
+      res.locals.account = { ...account };
+      delete res.locals.account.password;
+
+      return next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  saveSession: RequestHandler = (req, res, next) => {
+    (req.session as any).userId = res.locals.account.id;
+    next();
   };
 }
 
