@@ -1,1 +1,1 @@
-export { sessionRouter, sessionHandler } from './session';
+export { sessionMiddleware, sessionHandler } from './session';

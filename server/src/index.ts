@@ -1,6 +1,7 @@
-import express from 'express';
+import express, { ErrorRequestHandler } from 'express';
 import { DBDataSource } from './config';
-import { sessionRouter } from './middlewares';
+import { sessionMiddleware } from './middlewares';
+import { accountRouter } from './routes';
 
 export const startServer = async () => {
   const db = DBDataSource.instance;
@@ -11,13 +12,22 @@ export const startServer = async () => {
 
   app.use(express.json());
 
-  app.use(sessionRouter);
+  app.use(sessionMiddleware);
+
+  app.use('/account', accountRouter);
 
   app.use((req, res) => {
     res.status(404).json({
       message: 'nothing here',
     });
   });
+
+  app.use(((err, req, res, next) => {
+    console.log(err);
+    res.status(500).json({
+      message: 'oops, an error occurred',
+    });
+  }) as ErrorRequestHandler);
 
   return new Promise((resolve) => {
     const server = app.listen(3000, () => {

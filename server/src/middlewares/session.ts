@@ -40,4 +40,4 @@ router.post('/session', (req, res) => {
   });
 });
 
-export const sessionRouter = router;
+export const sessionMiddleware = router;

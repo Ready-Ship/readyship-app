@@ -1,0 +1,1 @@
+export { accountController } from './account';
