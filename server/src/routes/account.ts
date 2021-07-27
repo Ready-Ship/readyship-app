@@ -16,4 +16,18 @@ router.post(
   }
 );
 
+router.post('/signout', async (req, res, next) => {
+  try {
+    await new Promise<void>((resolve, reject) =>
+      req.session.destroy((err) => {
+        if (err) return reject(err);
+        return resolve();
+      })
+    );
+    res.status(200).json({ message: 'signed out' });
+  } catch (err) {
+    next(err);
+  }
+});
+
 export const accountRouter = router;
