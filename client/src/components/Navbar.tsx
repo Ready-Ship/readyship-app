@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import '../stylesheets/components/Navbar.css';
 
 interface NavbarProps {
-  click: (event: MouseEvent) => void
+  click: (event: MouseEvent) => void;
+  open: boolean;
 }
 
-const Navbar:FC<NavbarProps> = ({ click }) => {
+const Navbar:FC<NavbarProps> = ({ click, open }) => {
 
   return (
     <nav className="navbar">
@@ -16,7 +17,7 @@ const Navbar:FC<NavbarProps> = ({ click }) => {
         READYSHIP
       </Link>
       {/* Hamburger Menu */}
-      <div className="hamburger__menu" onClick={click}>
+      <div className={open ? 'hamburger__menu open' : 'hamburger__menu'} onClick={click}>
         <div id="hb-top"></div>
         <div id="hb-middle"></div>
         <div id="hb-bottom"></div>
