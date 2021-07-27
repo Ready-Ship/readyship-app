@@ -7,12 +7,13 @@ describe('TaskModel', () => {
 
   beforeAll(async () => {
     await db.connect();
+    await db.drop();
     await db.create();
     return db.seed();
   });
 
   afterAll(async () => {
-    // await db.drop();
+    await db.drop();
     return db.close();
   });
 

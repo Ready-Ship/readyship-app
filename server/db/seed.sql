@@ -2,9 +2,9 @@ DELETE FROM account;
 
 INSERT INTO 
 account 
-(email, password) 
+(email, password, name) 
 VALUES 
-('test@test.com', 'test');
+('test@test.com', 'test', 'mr. test');
 
 INSERT INTO 
 project 
