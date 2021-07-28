@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS "account_has_task" CASCADE;
 DROP TABLE IF EXISTS "task" CASCADE;
+DROP TABLE IF EXISTS "project_has_assignee" CASCADE;
 DROP TABLE IF EXISTS "project" CASCADE;
 DROP TABLE IF EXISTS "organization_has_member" CASCADE;
 DROP TABLE IF EXISTS "organization" CASCADE;
