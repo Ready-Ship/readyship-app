@@ -28,22 +28,41 @@ export class OrganizationModel {
 
   async findByUserId(userId: string) {
     const query =
-      'SELECT o.* FROM organization AS o JOIN organization_has_member AS ohm ON o.id = ohm.organizationid where ohm.userid = $1';
+      'SELECT o.* FROM organization AS o JOIN organization_has_member AS ohm ON o.id = ohm.organizationid WHERE ohm.userid = $1';
     const result = await this.client.query(query, [userId]);
     return result.rows;
   }
 
   async findByOrganizationIdAndUserId(organizationId: string, userId: string) {
     const query =
-      'SELECT o.* FROM organization AS o JOIN organization_has_member AS ohm ON o.id = ohm.organizationid where o.id = $1 AND ohm.userid = $2';
+      'SELECT o.* FROM organization AS o JOIN organization_has_member AS ohm ON o.id = ohm.organizationid WHERE o.id = $1 AND ohm.userid = $2';
     const result = await this.client.query(query, [organizationId, userId]);
     return result.rows[0];
+  }
+
+  async getUserIdsByOrganizationId(organizationId: string) {
+    const query =
+      'SELECT * from organization_has_member WHERE organizationid = $1';
+    const result = await this.client.query(query, [organizationId]);
+    return result.rows;
   }
 
   async joinOrganization(organizationId: string, userId: string) {
     const query =
       'INSERT INTO organization_has_member (organizationid, userid) VALUES ($1, $2)';
     return this.client.query(query, [organizationId, userId]);
+  }
+
+  async joinOrganizationMultiple(organizationId: string, userIds: string[]) {
+    if (userIds.length === 0) {
+      throw Error('cannot have zero userids');
+    }
+
+    let query =
+      'INSERT INTO organization_has_member (organizationid, userid) VALUES ' +
+      userIds.map((_, i) => `($1, $${i + 2}), `).join('');
+    query = query.slice(0, query.length - 2);
+    return this.client.query(query, [organizationId, ...userIds]);
   }
 
   async leaveOrganization(organizationid: string, userId: string) {

@@ -95,4 +95,33 @@ describe('OrganizationModel', () => {
     );
     expect(result.rows).toHaveLength(0);
   });
+
+  it('should join multiple users to an organization', async () => {
+    await client.query(
+      'INSERT INTO account (email, password, name) VALUES ($1, $2, $3)',
+      ['a@b.com', 'pass', 'hello']
+    );
+    const userId = (await client.query('SELECT id FROM account LIMIT 1'))
+      .rows[0].id;
+    await Organization.create({ creatorid: userId, name: 'join multiple' });
+    const organization = (
+      await client.query(
+        'SELECT id FROM organization WHERE name = $1 LIMIT 1',
+        ['join multiple']
+      )
+    ).rows[0];
+
+    const users = (await client.query('SELECT * FROM account')).rows;
+
+    await Organization.joinOrganizationMultiple(
+      organization.id,
+      users.map(({ id }) => id)
+    );
+
+    const members = await Organization.getUserIdsByOrganizationId(
+      organization.id
+    );
+
+    expect(members).toHaveLength(users.length);
+  });
 });
