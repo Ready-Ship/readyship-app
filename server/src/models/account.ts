@@ -12,8 +12,9 @@ export class AccountModel {
   async create(params: CreateAccountParams) {
     const { email, password, name } = params;
     const query =
-      'INSERT INTO account (email, password, name) VALUES ($1, $2, $3)';
-    return this.client.query(query, [email, password, name]);
+      'INSERT INTO account (email, password, name) VALUES ($1, $2, $3) RETURNING *';
+    const result = await this.client.query(query, [email, password, name]);
+    return result.rows[0];
   }
 
   async find() {
