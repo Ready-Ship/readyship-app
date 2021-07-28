@@ -12,7 +12,8 @@ export class OrganizationModel {
     const { creatorid, name } = params;
     const query =
       'INSERT INTO organization (creatorid, name) VALUES ($1, $2) RETURNING *';
-    return this.client.query(query, [creatorid, name]);
+    const result = await this.client.query(query, [creatorid, name]);
+    return result.rows[0];
   }
 
   async find() {
