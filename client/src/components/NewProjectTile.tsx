@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { FC, MouseEvent } from 'react'
 
 import '../stylesheets/components/NewProjectTile.css';
 
-const NewProjectTile = () => {
+interface NewProjectTileProps {
+  click: (event: MouseEvent) => void;
+}
+
+const NewProjectTile:FC<NewProjectTileProps> = ({ click }) => {
   return (
-    <div className="new-project-tile-container">
+    <div className="new-project-tile-container" onClick={click}>
       <div className="new-project-tile">
         <span>+</span>
       </div>

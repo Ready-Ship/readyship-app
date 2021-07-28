@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { FC, MouseEvent } from 'react';
 
 import '../stylesheets/components/NewProjectDrawer.css';
 
-const NewProjectDrawer = () => {
+interface NewProjectProps {
+  open: boolean;
+  click: (event: MouseEvent) => void;
+}
+
+const NewProjectDrawer:FC<NewProjectProps> = ({ open, click }) => {
+  
   return (
-    <div className="new-proj-drawer show">
+    <div className={open ? "new-proj-drawer open" : "new-proj-drawer"}>
       <h1>Create New Project</h1>
       <form className="new-proj__container">
         <div className="title-input form-control-group">
@@ -18,6 +24,7 @@ const NewProjectDrawer = () => {
         </div>
         <button type="submit">Create Project</button>
       </form>
+      <button id="new-proj__cancel" onClick={click}>Cancel</button>
     </div>
   )
 }
