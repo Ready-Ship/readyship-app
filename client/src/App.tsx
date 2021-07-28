@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // App Css Import
 import './stylesheets/App.css';
@@ -8,26 +8,27 @@ import './stylesheets/App.css';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import TestScreen from './screens/TestScreen';
 
 // Component Imports
 import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import Overlay from './components/Overlay';
 
-const App:FC = () => {
+const App: FC = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  
+
   const menuButtonHandler = (e: any) => {
     e.target.classList.toggle('open');
-    if(!menuToggle) {
-       setMenuToggle(true);
-       e.target.classList.add('open');
+    if (!menuToggle) {
+      setMenuToggle(true);
+      e.target.classList.add('open');
     } else {
       setMenuToggle(false);
       e.target.classList.remove('open');
     }
-  }
+  };
 
   return (
     <Router>
@@ -36,7 +37,7 @@ const App:FC = () => {
         <Overlay show={menuToggle} click={() => setMenuToggle(false)} />
         <Navbar open={menuToggle} click={menuButtonHandler} />
       </header>
-      <main className="readyship__main-section">
+      <main className='readyship__main-section'>
         <Switch>
           <Route exact path='/'>
             <LoginScreen />
@@ -47,10 +48,13 @@ const App:FC = () => {
           <Route path='/dashboard'>
             <DashboardScreen />
           </Route>
+          <Route path='/test'>
+            <TestScreen />
+          </Route>
         </Switch>
       </main>
     </Router>
   );
-}
+};
 
 export default App;
