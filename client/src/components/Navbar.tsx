@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import '../stylesheets/components/Navbar.css';
 
+import logo from '../assets/readyship-logo--white-06.svg';
+
 interface NavbarProps {
   click: (event: MouseEvent) => void;
   open: boolean;
@@ -13,9 +15,9 @@ const Navbar:FC<NavbarProps> = ({ click, open }) => {
   return (
     <nav className="navbar">
       {/* Navbar Logo */}
-      <Link to="/" className="navbar__logo">
-        READYSHIP
-      </Link>
+        <a className="navbar__logo" href="/">
+          <img src={logo} alt="" />
+        </a>
       {/* Hamburger Menu */}
       <div className={open ? 'hamburger__menu open' : 'hamburger__menu'} onClick={click}>
         <div id="hb-top"></div>
