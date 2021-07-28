@@ -22,7 +22,7 @@ export class AccountModel {
     return result.rows;
   }
 
-  async findById(id: string) {
+  async findById(id: number) {
     const query = 'SELECT * FROM account WHERE id = $1';
     const result = await this.client.query(query, [id]);
     return result.rows[0];
