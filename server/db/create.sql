@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS "project" (
 
 CREATE TABLE IF NOT EXISTS "project_has_assignee" (
   id SERIAL PRIMARY KEY, 
-  accountid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
+  userid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
   projectid INT NOT NULL REFERENCES project (id) ON DELETE CASCADE 
 )
 
