@@ -3,6 +3,11 @@ export const CREATE_PROJECT_REQUEST = 'CREATE_PROJECT_REQUEST';
 export const CREATE_PROJECT_SUCCESS = 'CREATE_PROJECT_SUCCESS';
 export const CREATE_PROJECT_FAIL = 'CREATE_PROJECT_FAIL';
 
+// export type ProjectInfo = {
+//   title: string,
+
+// }
+
 // update a PROJECT
 export const UPDATE_PROJECT_REQUEST = 'UPDATE_PROJECT_REQUEST';
 export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS';

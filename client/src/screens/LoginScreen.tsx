@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch, connect } from 'react-redux';
 
+import logo from '../assets/readyship-logo--white-06.svg'
 
 // Import Css
 import '../stylesheets/screens/LoginScreen.css';
@@ -40,19 +41,17 @@ const LoginScreen = () => {
   return (
     <div className="login__screen">
       <div className="loginScreen__form-container">
-        <h1>Login</h1>
+        <h1>Log In</h1>
         {/* {userInfo ? <Redirect to='/dashboard'/> : null} */}
         <form onSubmit={undefined}>
           <div>
-            <label htmlFor="email">Email</label>
             <input name="email" placeholder='Email' id="email" type="email" autoComplete="off" required />
           </div>
           <div>
-            <label htmlFor="password">Password</label>
             <input name="password" placeholder='Password' id="password" type="password" required />
           </div>
           <div>
-            <button id="login__btn" type="submit"> Login </button>
+            <button id="login__btn" type="submit"> Log In </button>
             <span id="signup-redirect">Not a User? <Link to='/signup' id="login-form__signup-btn">Sign Up</Link> </span>
           </div>
           <div className="signup__message">
