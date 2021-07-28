@@ -19,10 +19,25 @@ CREATE TABLE IF NOT EXISTS "task" (
 
 CREATE TABLE IF NOT EXISTS "account_has_task" (
   id SERIAL PRIMARY KEY,
-  accountid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
+  userid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
   taskid INT NOT NULL REFERENCES task (id) ON DELETE CASCADE,
   iscomplete TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS "organization" (
+  id SERIAL PRIMARY KEY,
+  creatorid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "organization_has_member" (
+  id SERIAL PRIMARY KEY,
+  userid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
+  organizationid INT NOT NULL REFERENCES organization (id) ON DELETE CASCADE,
+  iscomplete TIMESTAMP
+);
+
+DROP TABLE IF EXISTS "session";
 
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",

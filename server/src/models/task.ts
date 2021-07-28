@@ -3,7 +3,7 @@ import { DBDataSource } from '../config';
 export class TaskModel {
   async getByProjectIdAndUserId(projectId: string, userId: string) {
     return DBDataSource.instance.client.query(
-      'SELECT t.*, aht.* FROM task AS t JOIN account_has_task AS aht ON t.id = t.projectid WHERE t.projectid = $1 AND aht.accountid = $2',
+      'SELECT t.*, aht.* FROM task AS t JOIN account_has_task AS aht ON t.id = aht.taskid WHERE t.projectid = $1 AND aht.userid = $2',
       [projectId, userId]
     );
   }

@@ -5,6 +5,7 @@ describe('DBDataSource', () => {
 
   beforeAll(async () => {
     await db.connect();
+    await db.drop();
   });
 
   afterAll(async () => {

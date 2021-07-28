@@ -37,18 +37,18 @@ describe('TaskModel', () => {
   });
 
   it('should getByProjectIdAndUserId', async () => {
-    const accountId = (await client.query('SELECT id FROM account LIMIT 1'))
+    const userId = (await client.query('SELECT id FROM account LIMIT 1'))
       .rows[0].id;
     const projectId = (await client.query('SELECT id FROM project LIMIT 1'))
       .rows[0].id;
 
-    const results = await Task.getByProjectIdAndUserId(projectId, accountId);
+    const results = await Task.getByProjectIdAndUserId(projectId, userId);
 
     expect(results.rows).toHaveLength(1);
 
     for (const row of results.rows) {
       expect(row['projectid']).toBe(projectId);
-      expect(row['accountid']).toBe(accountId);
+      expect(row['userid']).toBe(userId);
     }
   });
 });
