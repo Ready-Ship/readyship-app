@@ -10,7 +10,8 @@ export class OrganizationModel {
 
   async create(params: CreateOrganizationParams) {
     const { creatorid, name } = params;
-    const query = 'INSERT INTO organization (creatorid, name) VALUES ($1, $2)';
+    const query =
+      'INSERT INTO organization (creatorid, name) VALUES ($1, $2) RETURNING *';
     return this.client.query(query, [creatorid, name]);
   }
 

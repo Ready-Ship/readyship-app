@@ -1,14 +1,15 @@
 // require in controllers
-import {Router} from 'express'
+import { Router } from 'express';
 import { projectController } from '../controllers';
+import { ensureAuth } from '../middlewares';
 
 const router = Router();
 
-router.get('/', projectController.findAllProjects);
+router.get('/', ensureAuth, projectController.findAllProjects);
 
-router.get('/:projectId/assignee', ) // /project/:projectId
+router.get('/:projectId/assignee'); // /project/:projectId
 
-router.post('/:projectId/assign')
+router.post('/:projectId/assign');
 
 export const projectRouter = router;
 
@@ -31,6 +32,5 @@ export const projectRouter = router;
 //   app.delete('/projects/:projectsId', projectController.delete);
 
 // }
-
 
 //do we need an app.listen?
