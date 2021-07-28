@@ -37,6 +37,16 @@ const projectReducer = (state: projectState = initialState, action: Action) => {
               ...state,
               projects: [action.payload],
             };
+            case types.USER_PROJECTS_REQUEST:
+                return {
+                  ...state,
+                  id: [action.payload],
+                };
+                case types.ASSIGNED_PROJECTS_REQUEST:
+                  return {
+                    ...state,
+                    id: [action.payload],
+                  };
             case types.ASSIGNER_SINGLE_PROJECT_REQUEST:
                 return {
                   ...state,

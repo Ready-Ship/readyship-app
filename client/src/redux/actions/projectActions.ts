@@ -46,6 +46,36 @@ const createProject = async ( projects: any, dispatch: (arg0: { type: string; pa
   };
   
 
+// user prjects
+
+const userProjects = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
+  dispatch({ type: ASSIGNEE_SINGLE_PROJECT_REQUEST, payload: { projects } });
+  const projectsCopy = projects.id; //change it later
+  try {
+    const { data } = await Axios.post('/project/userProjects', projectsCopy);
+    const PROJECT = data.updatedDoc.PROJECT;
+    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
+  } catch (error) {
+    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_FAIL, payload: error.message });
+  }
+};
+
+
+// user assigned projects
+
+const userAssignedProjects = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
+  dispatch({ type: ASSIGNEE_SINGLE_PROJECT_REQUEST, payload: { projects } });
+  const projectsCopy = projects.id; //change it later
+  try {
+    const { data } = await Axios.post('/project/userAssignedProjects', projectsCopy);
+    const PROJECT = data.updatedDoc.PROJECT;
+    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
+  } catch (error) {
+    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_FAIL, payload: error.message });
+  }
+};
+
+
 //   ASSIGNER
 
 const createAssigner = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
@@ -74,4 +104,4 @@ const createAssignee = async ( projects: any, dispatch: (arg0: { type: string; p
     }
 };
 
-  export { createProject, updateProject, deleteProject , createAssigner, createAssignee};
+  export { createProject, updateProject, deleteProject , userProjects, userAssignedProjects, createAssigner, createAssignee};
