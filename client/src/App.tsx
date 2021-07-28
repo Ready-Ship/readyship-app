@@ -7,7 +7,7 @@ import './stylesheets/App.css';
 // Screens Import
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
-// import DashboardScreen from './screens/DashboardScreen';
+import DashboardScreen from './screens/DashboardScreen';
 
 // Component Imports
 import Navbar from './components/Navbar';
@@ -29,16 +29,6 @@ const App:FC = () => {
     }
   }
 
-  // useEffect(() => {
-  //   const menuBtn = document.querySelector('.hamburger__menu');
-
-  //   if(menuToggle){
-  //     menuBtn?.classList.add('open');
-  //   } else {
-  //     menuBtn?.classList.remove('open');
-  //   }
-  // }, [menuToggle]);
-
   return (
     <Router>
       <header>
@@ -46,13 +36,16 @@ const App:FC = () => {
         <Overlay show={menuToggle} click={() => setMenuToggle(false)} />
         <Navbar open={menuToggle} click={menuButtonHandler} />
       </header>
-      <main>
+      <main className="readyship__main-section">
         <Switch>
           <Route exact path='/'>
             <LoginScreen />
           </Route>
           <Route exact path='/signup'>
             <SignupScreen />
+          </Route>
+          <Route path='/dashboard'>
+            <DashboardScreen />
           </Route>
         </Switch>
       </main>

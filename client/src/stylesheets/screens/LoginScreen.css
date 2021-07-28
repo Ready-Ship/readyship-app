@@ -1,6 +1,7 @@
 .login__screen {
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +12,7 @@
   width: 500px;
   height: 400px;
   padding: 50px 60px 70px 60px;
-  background-color: #fff;
+  background-color: var(--tertiary-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,9 +22,9 @@
 }
 
 .loginScreen__form-container h1 {
-  color: #3488ce;
+  color: var(--primary-color);
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .loginScreen__form-container > form {
@@ -41,40 +42,46 @@
 }
 
 .loginScreen__form-container > form > div > label {
-  color: #fff;
+  color: var(--primary-color);
 } 
 
 .loginScreen__form-container > form > div > input {
-  padding: .7rem;
-  border: solid 1px #3488ce;
+  margin-top: 1.3rem;
+  padding: .6rem;
+  font-size: 1rem;
+  background-color: transparent;
+  border: solid 1px var(--primary-color);
   border-radius: 8px;
-  margin-top: 3px;
-  margin-bottom: 7px;
 }
 
+.loginScreen__form-container > form > div > input:focus {
+  background-color: #fff;
+  border: solid 1px var(--accent-color);
+  outline: none;
+}
+
+
 #login__btn {
-  padding: 10px 0;
-  background-color: #3488ce;
-  color: #fff;
-  border: solid 2px #3488ce;
-  border-radius: 8px;
-  font-weight: 500;
   margin-top: 20px;
+  padding: .7rem 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: solid 1px var(--primary-color);
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  overflow: hidden;
-  transition: .3s all ease;
+  transition: all .3s ease-in-out;
   font-size: 1rem;
 }
 
 #login__btn:hover {
- background-color: #28699e;
- border-color: #28699e;
- color: #fff;
+  color: var(--primary-color);
+  background-color: transparent;
 }
 
 #login-form__signup-btn {
   text-decoration: none;
-  color: #3488ce;
+  color: var(--accent-color);
   font-size: 1rem;
   cursor: pointer;
   transition: .3s all ease;
@@ -85,5 +92,6 @@
 }
 
 #login-form__signup-btn:hover {
-  color: #28699e;
+  color: var(--primary-color);
+  font-weight: 600;
 }
