@@ -20,6 +20,18 @@ VALUES
 
 INSERT INTO 
 account_has_task
-(accountid, taskid)
+(userid, taskid, iscomplete)
 VALUES
-((SELECT id from account LIMIT 1), (SELECT id from task LIMIT 1));
+((SELECT id from account LIMIT 1), (SELECT id from task LIMIT 1), NOW());
+
+INSERT INTO
+organization
+(creatorid, name)
+VALUES
+((SELECT id from account LIMIT 1), 'organization');
+
+INSERT INTO
+organization_has_member
+(organizationid, userid)
+VALUES
+((SELECT id FROM organization LIMIT 1), (SELECT id FROM account LIMIT 1));

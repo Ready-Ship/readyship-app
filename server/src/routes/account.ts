@@ -3,9 +3,14 @@ import { accountController } from '../controllers';
 
 const router = Router();
 
-router.post('/signup', accountController.signup, (req, res) => {
-  res.status(200).json({ account: res.locals.account });
-});
+router.post(
+  '/signup',
+  accountController.signup,
+  accountController.saveSession,
+  (req, res) => {
+    res.status(200).json({ account: res.locals.account });
+  }
+);
 
 router.post(
   '/login',
@@ -24,6 +29,7 @@ router.post('/signout', async (req, res, next) => {
         return resolve();
       })
     );
+    res.clearCookie('connect.sid');
     res.status(200).json({ message: 'signed out' });
   } catch (err) {
     next(err);
