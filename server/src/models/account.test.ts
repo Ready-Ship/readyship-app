@@ -31,12 +31,10 @@ describe('AccountModel', () => {
       email: 'test@test.com',
       password: 'test',
     };
-    await Account.create(data);
+    const account = await Account.create(data);
 
-    const account = await Account.find();
-    expect(account).toHaveLength(1);
     for (const key in data) {
-      expect(account[0][key]).toBe((data as any)[key]);
+      expect(account[key]).toBe((data as any)[key]);
     }
   });
 
