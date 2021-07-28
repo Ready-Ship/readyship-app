@@ -1,7 +1,7 @@
 import express, { ErrorRequestHandler } from 'express';
 import { DBDataSource } from './config';
 import { sessionMiddleware } from './middlewares';
-import { accountRouter, projectRouter } from './routes';
+import { accountRouter, projectRouter, organizationRouter } from './routes';
 
 export const startServer = async () => {
   const db = DBDataSource.instance;
@@ -16,6 +16,7 @@ export const startServer = async () => {
 
   app.use('/account', accountRouter);
   app.use('/project', projectRouter);
+  app.use('/organization', organizationRouter);
 
   app.use((req, res) => {
     res.status(404).json({
