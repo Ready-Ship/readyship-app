@@ -28,7 +28,7 @@
 //           <div className="project-tile__content-container">
 //             <div className="project-tile__title">
 //               <h4>Title</h4>
-//               <p>{props.title}</p>
+//               <p>{props.title:}</p>
 //             </div>
 //             <div className="project-tile__teams">
 //               <span>
