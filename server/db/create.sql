@@ -32,10 +32,13 @@ CREATE TABLE IF NOT EXISTS "organization" (
 
 CREATE TABLE IF NOT EXISTS "organization_has_member" (
   id SERIAL PRIMARY KEY,
-  userid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
   organizationid INT NOT NULL REFERENCES organization (id) ON DELETE CASCADE,
+  userid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
   iscomplete TIMESTAMP
 );
+
+ALTER TABLE "organization_has_member" DROP CONSTRAINT IF EXISTS "organization_has_member_uq";
+ALTER TABLE "organization_has_member" ADD CONSTRAINT "organization_has_member_uq" UNIQUE(userid, organizationid);
 
 DROP TABLE IF EXISTS "session";
 

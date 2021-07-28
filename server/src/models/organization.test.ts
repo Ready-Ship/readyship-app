@@ -13,7 +13,7 @@ describe('OrganizationModel', () => {
   });
 
   afterAll(async () => {
-    await db.drop();
+    // await db.drop();
     return db.close();
   });
 
@@ -66,5 +66,33 @@ describe('OrganizationModel', () => {
     );
 
     expect(got).toEqual(want);
+  });
+
+  it('should join and leave', async () => {
+    const userId = (await client.query('SELECT id FROM account LIMIT 1'))
+      .rows[0].id;
+
+    await Organization.create({ creatorid: userId, name: 'my org' });
+
+    const organization = (
+      await client.query(
+        'SELECT id FROM organization WHERE name = $1 LIMIT 1',
+        ['my org']
+      )
+    ).rows[0];
+
+    await Organization.joinOrganization(organization.id, userId);
+    let result = await client.query(
+      'SELECT * from organization_has_member WHERE organizationid = $1 AND userid = $2',
+      [organization.id, userId]
+    );
+    expect(result.rows).toHaveLength(1);
+
+    await Organization.leaveOrganization(organization.id, userId);
+    result = await client.query(
+      'SELECT * from organization_has_member WHERE organizationid = $1 AND userid = $2',
+      [organization.id, userId]
+    );
+    expect(result.rows).toHaveLength(0);
   });
 });

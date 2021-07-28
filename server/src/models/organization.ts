@@ -40,6 +40,18 @@ export class OrganizationModel {
     return result.rows[0];
   }
 
+  async joinOrganization(organizationId: string, userId: string) {
+    const query =
+      'INSERT INTO organization_has_member (organizationid, userid) VALUES ($1, $2)';
+    return this.client.query(query, [organizationId, userId]);
+  }
+
+  async leaveOrganization(organizationid: string, userId: string) {
+    const query =
+      'DELETE FROM organization_has_member WHERE organizationid = $1 AND userid = $2';
+    return this.client.query(query, [organizationid, userId]);
+  }
+
   async deleteMany() {
     const query = 'DELETE FROM organization';
     return this.client.query(query);
