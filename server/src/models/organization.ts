@@ -12,7 +12,8 @@ export class OrganizationModel {
     const { creatorid, name } = params;
     const query =
       'INSERT INTO organization (creatorid, name) VALUES ($1, $2) RETURNING *';
-    return this.client.query(query, [creatorid, name]);
+    const result = await this.client.query(query, [creatorid, name]);
+    return result.rows[0];
   }
 
   async find() {
@@ -48,7 +49,7 @@ export class OrganizationModel {
     return result.rows;
   }
 
-  async joinOrganization(organizationId: string, userId: string) {
+  async joinOrganization(organizationId: number, userId: string) {
     const query =
       'INSERT INTO organization_has_member (organizationid, userid) VALUES ($1, $2)';
     return this.client.query(query, [organizationId, userId]);
@@ -66,7 +67,7 @@ export class OrganizationModel {
     return this.client.query(query, [organizationId, ...userIds]);
   }
 
-  async leaveOrganization(organizationid: string, userId: string) {
+  async leaveOrganization(organizationid: number, userId: string) {
     const query =
       'DELETE FROM organization_has_member WHERE organizationid = $1 AND userid = $2';
     return this.client.query(query, [organizationid, userId]);

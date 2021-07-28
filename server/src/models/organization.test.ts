@@ -72,14 +72,10 @@ describe('OrganizationModel', () => {
     const userId = (await client.query('SELECT id FROM account LIMIT 1'))
       .rows[0].id;
 
-    await Organization.create({ creatorid: userId, name: 'my org' });
-
-    const organization = (
-      await client.query(
-        'SELECT id FROM organization WHERE name = $1 LIMIT 1',
-        ['my org']
-      )
-    ).rows[0];
+    const organization = await Organization.create({
+      creatorid: userId,
+      name: 'my org',
+    });
 
     await Organization.joinOrganization(organization.id, userId);
     let result = await client.query(
@@ -122,6 +118,7 @@ describe('OrganizationModel', () => {
       organization.id
     );
 
+    expect(members.length > 0).toBe(true);
     expect(members).toHaveLength(users.length);
   });
 });

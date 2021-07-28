@@ -10,16 +10,65 @@ const organizationCheck = yup.object({
 export class OrganizationController {
   client = DBDataSource.instance.client;
 
+  getAll: RequestHandler = async (req, res, next) => {
+    try {
+      const organizations = await Organization.find();
+      res.locals.organizations = organizations;
+
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
   createOrganization: RequestHandler = async (req, res, next) => {
     try {
       const { name } = await organizationCheck.validate(req.body);
 
-      const result = await Organization.create({
+      const organization = await Organization.create({
         name,
         creatorid: res.locals.userId,
       });
+      res.locals.organization = organization;
 
-      res.locals.organization = result.rows[0];
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  getUserOrganizations: RequestHandler = async (req, res, next) => {
+    try {
+      const organizations = await Organization.findByUserId(res.locals.userId);
+      res.locals.organizations = organizations;
+
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  joinOrganization: RequestHandler = async (req, res, next) => {
+    try {
+      const { organizationId } = req.params;
+      await Organization.joinOrganization(
+        parseInt(organizationId),
+        res.locals.userId
+      );
+
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  leaveOrganization: RequestHandler = async (req, res, next) => {
+    try {
+      const { organizationId } = req.params;
+      await Organization.leaveOrganization(
+        parseInt(organizationId),
+        res.locals.userId
+      );
 
       next();
     } catch (err) {
