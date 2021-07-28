@@ -27,7 +27,27 @@ const projectReducer = (state: projectState = initialState, action: Action) => {
         ...state,
         projects: [action.payload],
       };
-
+      case types.UPDATE_PROJECT_REQUEST:
+        return {
+          ...state,
+          projects: [action.payload],
+        };
+        case types.DELETE_PROJECT_REQUEST:
+            return {
+              ...state,
+              projects: [action.payload],
+            };
+            case types.ASSIGNER_SINGLE_PROJECT_REQUEST:
+                return {
+                  ...state,
+                  id: [action.payload],
+                };
+                case types.ASSIGNEE_SINGLE_PROJECT_REQUEST:
+                    return {
+                      ...state,
+                      id: [action.payload],
+                    };
+      
     default: {
       return state;
     }
