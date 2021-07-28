@@ -23,6 +23,12 @@ CREATE TABLE IF NOT EXISTS "account_has_task" (
   taskid INT NOT NULL REFERENCES task (id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS "project_has_assignee" (
+  id SERIAL PRIMARY KEY, 
+  accountid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
+  projectid INT NOT NULL REFERENCES project (id) ON DELETE CASCADE 
+)
+
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
         "sess" json NOT NULL,
