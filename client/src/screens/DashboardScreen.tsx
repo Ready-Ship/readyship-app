@@ -7,19 +7,16 @@ import ProjectTile from '../components/ProjectTile';
 import NewProjectDrawer from '../components/NewProjectDrawer';
 
 const DashboardScreen = () => {
-  const [newProjDrawerToggle, setNewProjDrawerToggle] = useState(false);
+  const [newProjToggle, setNewProjToggle] = useState(false);
   
   return (
     <div className="dashboard-screen">
-      <NewProjectDrawer/>
+      <NewProjectDrawer open={newProjToggle} click={() => setNewProjToggle(false)}/>
       <div className="dashboard-screen__container">
         <div className="dashboard-screen__projects">
           <h3 className="dashboard-screen__section-title">My Projects</h3>
           <CardGrid>
-            <NewProjectTile />
-            <ProjectTile />
-            <ProjectTile />
-            <ProjectTile />
+            <NewProjectTile click={() => setNewProjToggle(true)} />
             <ProjectTile />
             <ProjectTile />
             <ProjectTile />
@@ -28,8 +25,6 @@ const DashboardScreen = () => {
         <div className="dashboard-screen__assigned-projects">
           <h3 className="dashboard-screen__section-title">Assigned Projects</h3>
           <CardGrid>
-            <ProjectTile />
-            <ProjectTile />
             <ProjectTile />
             <ProjectTile />
             <ProjectTile />
