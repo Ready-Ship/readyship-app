@@ -16,7 +16,7 @@ import Axios from 'axios';
 export const signup = (name: string, email: string, password: string) => async (dispatch: Dispatch<UserDispatchTypes>) => {
   dispatch({ type: USER_SIGNUP_REQUEST, payload: { name, email, password } });
   try {
-    const { data } = await Axios.post('api call', { name, email, password });
+    const { data } = await Axios.post('/account/signup', { name, email, password });
 
     dispatch({ type: USER_SIGNUP_SUCCESS, payload: data.account });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data.account });
@@ -29,28 +29,28 @@ export const signup = (name: string, email: string, password: string) => async (
 }
 
 export const login = (email: string, password: string) => async (dispatch: Dispatch<UserDispatchTypes>) => {
-  dispatch({ type: USER_SIGNOUT_REQUEST, payload: { email, password } });
+  dispatch({ type: USER_LOGIN_REQUEST, payload: { email, password } });
   try {
-    const { data } = await Axios.post('api call', { email, password });
+    const { data } = await Axios.post('/account/login', { email, password });
 
-    dispatch({ type: USER_SIGNOUT_SUCCESS, payload: data.account });
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data.account });
   } catch(err) {
     dispatch({
-      type: USER_SIGNOUT_FAIL,
+      type: USER_LOGIN_FAIL,
       payload: err.response && err.response.data.message ? err.response.data.message : err.message
     })
   }
 }
 
 export const signout = () => async (dispatch: Dispatch<UserDispatchTypes>) => {
-  dispatch({ type: USER_LOGIN_REQUEST });
+  dispatch({ type: USER_SIGNOUT_REQUEST });
   try {
-    const { data } = await Axios.post('api call');
+    await Axios.post('/account/signout');
 
-    dispatch({ type: USER_LOGIN_SUCCESS, payload: data.account });
+    dispatch({ type: USER_SIGNOUT_SUCCESS });
   } catch(err) {
     dispatch({
-      type: USER_LOGIN_FAIL,
+      type: USER_SIGNOUT_FAIL,
       payload: err.response && err.response.data.message ? err.response.data.message : err.message
     })
   }

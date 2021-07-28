@@ -46,15 +46,12 @@ const SignupScreen = () => {
         <h1>Sign Up</h1>
         <form onSubmit={undefined}>
           <div className="signup__input-group">
-            <label htmlFor="userName">Full Name</label>
             <input name="userName" placeholder='Full Name' id="userName" type="text" required />
           </div>
           <div className="signup__input-group">
-            <label htmlFor="email">Email</label>
             <input name="email" placeholder='Email' id="email" type="email" required />
           </div>
           <div className="signup__input-group">
-            <label htmlFor="password">Password</label>
             <input name="password" placeholder='Password' id="password" type="password" required />
           </div>
           <div className="form__btn-group">
