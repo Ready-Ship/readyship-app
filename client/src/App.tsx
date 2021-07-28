@@ -8,6 +8,7 @@ import './stylesheets/App.css';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import ProjectScreen from './screens/ProjectScreen';
 
 // Component Imports
 import Navbar from './components/Navbar';
@@ -44,8 +45,11 @@ const App:FC = () => {
           <Route exact path='/signup'>
             <SignupScreen />
           </Route>
-          <Route path='/dashboard'>
+          <Route exact path='/dashboard'>
             <DashboardScreen />
+          </Route>
+          <Route exact path='/dashboard/:projectId'>
+            <ProjectScreen />
           </Route>
         </Switch>
       </main>

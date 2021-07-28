@@ -12,18 +12,18 @@ import {
   UserDispatchTypes
 } from '../constants/userConstants';
 
-interface DefaultState {
+interface DefaultUserState {
   loading: boolean,
   userInfo?: any,
   error?: string
 }
 
-const defaultState: DefaultState = {
+const defaultState: DefaultUserState = {
   loading: false,
   userInfo: null
 }
 
-export const userSignupReducer = (state: DefaultState = defaultState, action: UserDispatchTypes):DefaultState => {
+export const userSignupReducer = (state: DefaultUserState = defaultState, action: UserDispatchTypes):DefaultUserState => {
   switch(action.type) {
     case USER_SIGNUP_REQUEST:
       return { loading: true };
@@ -39,7 +39,7 @@ export const userSignupReducer = (state: DefaultState = defaultState, action: Us
   }
 };
 
-export const userLoginReducer = (state: DefaultState = defaultState, action: UserDispatchTypes):DefaultState => {
+export const userLoginReducer = (state: DefaultUserState = defaultState, action: UserDispatchTypes):DefaultUserState => {
   switch(action.type) {
     case USER_LOGIN_REQUEST:
       return { loading: true };
@@ -55,7 +55,7 @@ export const userLoginReducer = (state: DefaultState = defaultState, action: Use
   }
 };
 
-export const userSignoutReducer = (state: DefaultState = defaultState, action: UserDispatchTypes):DefaultState => {
+export const userSignoutReducer = (state: DefaultUserState = defaultState, action: UserDispatchTypes):DefaultUserState => {
   switch(action.type) {
     case USER_SIGNOUT_REQUEST:
       return { loading: true };

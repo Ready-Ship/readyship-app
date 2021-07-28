@@ -3,6 +3,8 @@ import {
     CREATE_PROJECT_REQUEST, CREATE_PROJECT_SUCCESS, CREATE_PROJECT_FAIL,
     UPDATE_PROJECT_REQUEST, UPDATE_PROJECT_SUCCESS, UPDATE_PROJECT_FAIL,
     DELETE_PROJECT_REQUEST, DELETE_PROJECT_SUCCESS, DELETE_PROJECT_FAIL,
+    USER_PROJECTS_REQUEST, USER_PROJECTS_SUCCESS, USER_PROJECTS_FAIL,
+    ASSIGNED_PROJECTS_REQUEST, ASSIGNED_PROJECTS_SUCCESS, ASSIGNED_PROJECTS_FAIL,
     ASSIGNER_SINGLE_PROJECT_REQUEST, ASSIGNER_SINGLE_PROJECT_SUCCESS, ASSIGNER_SINGLE_PROJECT_FAIL,
     ASSIGNEE_SINGLE_PROJECT_REQUEST, ASSIGNEE_SINGLE_PROJECT_SUCCESS, ASSIGNEE_SINGLE_PROJECT_FAIL
 } from '../constants/projectConstants';
@@ -46,17 +48,17 @@ const createProject = async ( projects: any, dispatch: (arg0: { type: string; pa
   };
   
 
-// user prjects
+// user projects
 
 const userProjects = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
-  dispatch({ type: ASSIGNEE_SINGLE_PROJECT_REQUEST, payload: { projects } });
+  dispatch({ type: USER_PROJECTS_REQUEST, payload: { projects } });
   const projectsCopy = projects.id; //change it later
   try {
     const { data } = await Axios.post('/project/userProjects', projectsCopy);
     const PROJECT = data.updatedDoc.PROJECT;
-    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
+    dispatch({ type: USER_PROJECTS_SUCCESS, payload: PROJECT });
   } catch (error) {
-    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_FAIL, payload: error.message });
+    dispatch({ type: USER_PROJECTS_FAIL, payload: error.message });
   }
 };
 
@@ -64,14 +66,14 @@ const userProjects = async ( projects: any, dispatch: (arg0: { type: string; pay
 // user assigned projects
 
 const userAssignedProjects = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
-  dispatch({ type: ASSIGNEE_SINGLE_PROJECT_REQUEST, payload: { projects } });
+  dispatch({ type: ASSIGNED_PROJECTS_REQUEST, payload: { projects } });
   const projectsCopy = projects.id; //change it later
   try {
     const { data } = await Axios.post('/project/userAssignedProjects', projectsCopy);
     const PROJECT = data.updatedDoc.PROJECT;
-    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
+    dispatch({ type: ASSIGNED_PROJECTS_SUCCESS, payload: PROJECT });
   } catch (error) {
-    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_FAIL, payload: error.message });
+    dispatch({ type: ASSIGNED_PROJECTS_FAIL, payload: error.message });
   }
 };
 
@@ -79,28 +81,28 @@ const userAssignedProjects = async ( projects: any, dispatch: (arg0: { type: str
 //   ASSIGNER
 
 const createAssigner = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
-    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_REQUEST, payload: { projects } });
+    dispatch({ type: ASSIGNER_SINGLE_PROJECT_REQUEST, payload: { projects } });
     const projectsCopy = projects.id; //change it later
     try {
       const { data } = await Axios.post('/project/addAssigner', projectsCopy);
       const PROJECT = data.updatedDoc.PROJECT;
-      dispatch({ type: ASSIGNEE_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
+      dispatch({ type: ASSIGNER_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
     } catch (error) {
-      dispatch({ type: ASSIGNEE_SINGLE_PROJECT_FAIL, payload: error.message });
+      dispatch({ type: ASSIGNER_SINGLE_PROJECT_FAIL, payload: error.message });
     }
 };
   
 // ASSIGNEE
 
 const createAssignee = async ( projects: any, dispatch: (arg0: { type: string; payload: any; }) => void ) => {
-    dispatch({ type: ASSIGNER_SINGLE_PROJECT_REQUEST, payload: { projects } });
+    dispatch({ type: ASSIGNEE_SINGLE_PROJECT_REQUEST, payload: { projects } });
     const projectsCopy = projects.id;//change it later
     try {
       const { data } = await Axios.post('/project/addAssignee', projectsCopy);
       const PROJECT = data.updatedDoc.PROJECT;
-      dispatch({ type: ASSIGNER_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
+      dispatch({ type: ASSIGNEE_SINGLE_PROJECT_SUCCESS, payload: PROJECT });
     } catch (error) {
-      dispatch({ type: ASSIGNER_SINGLE_PROJECT_FAIL, payload: error.message });
+      dispatch({ type: ASSIGNEE_SINGLE_PROJECT_FAIL, payload: error.message });
     }
 };
 
