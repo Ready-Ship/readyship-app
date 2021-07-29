@@ -5,12 +5,14 @@ import CardGrid from '../components/ProjectGrid';
 import NewProjectTile from '../components/NewProjectTile';
 import ProjectTile from '../components/ProjectTile';
 import NewProjectDrawer from '../components/NewProjectDrawer';
+import Overlay from '../components/Overlay';
 
 const DashboardScreen = () => {
   const [newProjToggle, setNewProjToggle] = useState(false);
   
   return (
     <div className="dashboard-screen">
+      <Overlay show={newProjToggle} click={() => setNewProjToggle(false)} />
       <NewProjectDrawer open={newProjToggle} click={() => setNewProjToggle(false)}/>
       <div className="dashboard-screen__container">
         <div className="dashboard-screen__projects">

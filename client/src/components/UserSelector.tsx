@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, MouseEvent } from 'react';
 import { useEffect } from 'react';
 import { useMemo } from 'react';
 import { User } from '../types';
@@ -29,7 +29,11 @@ const UserItem: FC<UserItemProps> = ({ user, isSelected, onSelect }) => {
   );
 };
 
-const UserSelector = () => {
+interface UserSelectorProps {
+  click?: (event: MouseEvent) => void;
+}
+
+const UserSelector:FC<UserSelectorProps> = ({ click }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [selected, setSelected] = useState<User[]>([]);
 
@@ -82,7 +86,7 @@ const UserSelector = () => {
           </div>
         ))}
       </div> : null}
-      <button className="selector__cancel-btn">Cancel</button>
+      <button className="selector__cancel-btn" onClick={click}><i className="fas fa-chevron-left"></i> Cancel</button>
     </div>
   );
 };
