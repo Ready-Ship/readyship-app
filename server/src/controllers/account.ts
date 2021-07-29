@@ -53,6 +53,18 @@ export class AccountController {
     }
   };
 
+  authenticate: RequestHandler = async (req, res, next) => {
+    try {
+      const account = await Account.findById(res.locals.userId);
+      res.locals.account = account;
+      delete res.locals.account.password;
+
+      return next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
   saveSession: RequestHandler = (req, res, next) => {
     (req.session as any).userId = res.locals.account.id;
     next();

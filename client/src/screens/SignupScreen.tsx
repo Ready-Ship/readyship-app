@@ -1,65 +1,78 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch, connect } from 'react-redux';
-
-// Import CSS
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import * as authActions from '../redux/actions/authActions';
+import { RootState } from '../redux/reducers/rootReducer';
 import '../stylesheets/screens/SignupScreen.css';
 
-// Import Register Action from userActions
-// import { register } from '../redux/actions/userActions';
-
-
-
 const SignupScreen = () => {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  // // Pull userRegister state object from State using useSelector hook
-  // // const userRegister = useSelector(state => state.userRegister);
-  // // const { loading, userInfo, error } = userRegister;
+  useEffect(() => {
+    if (authState.user) {
+      history.push('/dashboard');
+    }
+  }, [authState.user, history]);
 
-  // const loading = props.loading;
-  // const userInfo = props.email;
-  // const error = props.error;
-
-  // // signup form submit handler function
-  // // on form submit will dispatch register action func
-  // const signupSubmitHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(register(name, email, password));
-  // };
-
-  // // render login screen once user registers
-  // useEffect(() => {
-  //   if(userInfo) {
-  //     // come back to this ( redirect to dashboard)
-  //     props.history.push('/');
-  //   }
-  // }, [userInfo]);
+  const signup = () => {
+    if (name && email && password) {
+      dispatch(authActions.signup(name, email, password));
+    }
+  };
 
   return (
-    <div className="signup__screen">
-      <div className="signupScreen__form-container">
+    <div className='signup__screen'>
+      <div className='signupScreen__form-container'>
         <h1>Sign Up</h1>
         <form onSubmit={undefined}>
-          <div className="signup__input-group">
-            <input name="userName" placeholder='Full Name' id="userName" type="text" required />
+          <div className='signup__input-group'>
+            <input
+              name='userName'
+              placeholder='Full Name'
+              id='userName'
+              type='text'
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-          <div className="signup__input-group">
-            <input name="email" placeholder='Email' id="email" type="email" required />
+          <div className='signup__input-group'>
+            <input
+              name='email'
+              placeholder='Email'
+              id='email'
+              type='email'
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-          <div className="signup__input-group">
-            <input name="password" placeholder='Password' id="password" type="password" required />
+          <div className='signup__input-group'>
+            <input
+              name='password'
+              placeholder='Password'
+              id='password'
+              type='password'
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          <div className="form__btn-group">
-            <button type="submit">Submit</button>
-            <Link to='/' id="form__cancel-btn">Cancel</Link> 
+          <div className='form__btn-group'>
+            <button type='button' onClick={signup}>
+              Submit
+            </button>
+            <Link to='/' id='form__cancel-btn'>
+              Cancel
+            </Link>
           </div>
-          <div className="signup__message">
-          </div>
+          <div className='signup__message'></div>
         </form>
       </div>
     </div>

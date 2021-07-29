@@ -16,10 +16,17 @@ import TestScreen from './screens/TestScreen';
 import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import Overlay from './components/Overlay';
+import { useDispatch } from 'react-redux';
+
+import * as authActions from './redux/actions/authActions';
 
 const App: FC = () => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authActions.authenticate());
+  }, [dispatch]);
 
   const menuButtonHandler = (e: any) => {
     e.target.classList.toggle('open');

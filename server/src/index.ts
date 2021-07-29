@@ -1,4 +1,5 @@
 import express, { ErrorRequestHandler } from 'express';
+import cors from 'cors';
 import { DBDataSource } from './config';
 import { sessionMiddleware } from './middlewares';
 import { accountRouter, projectRouter, organizationRouter } from './routes';
@@ -10,6 +11,7 @@ export const startServer = async () => {
 
   const app = express();
 
+  app.use(cors({ credentials: true, origin: true }));
   app.use(express.json());
 
   app.use(sessionMiddleware);
@@ -32,7 +34,7 @@ export const startServer = async () => {
   }) as ErrorRequestHandler);
 
   return new Promise((resolve) => {
-    const server = app.listen(3000, () => {
+    const server = app.listen(3001, () => {
       console.log('server started');
       resolve(server);
     });
