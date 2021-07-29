@@ -47,15 +47,14 @@ CREATE TABLE IF NOT EXISTS "organization_has_member" (
 ALTER TABLE "organization_has_member" DROP CONSTRAINT IF EXISTS "organization_has_member_uq";
 ALTER TABLE "organization_has_member" ADD CONSTRAINT "organization_has_member_uq" UNIQUE(userid, organizationid);
 
-DROP TABLE IF EXISTS "session";
-
-CREATE TABLE "session" (
+CREATE TABLE IF NOT EXISTS "session" (
   "sid" varchar NOT NULL COLLATE "default",
         "sess" json NOT NULL,
         "expire" timestamp(6) NOT NULL
 )
 WITH (OIDS=FALSE);
 
+ALTER TABLE "session" DROP CONSTRAINT IF EXISTS "session_pkey";
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
-CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+CREATE INDEX IF NOT EXISTS "IDX_session_expire" ON "session" ("expire");
