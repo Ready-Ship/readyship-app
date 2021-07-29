@@ -29,6 +29,7 @@
   align-items: center;
 }
 
+.menu__links > li > p,
 .menu__links > li > a {
   display: flex;
   align-items: center;
@@ -39,9 +40,11 @@
   color: #fff;
   flex: 1;
   padding: 1rem;
-  transition: all .300s ease-in;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
 }
 
+.menu__links > li > p:hover,
 .menu__links > li > a:hover {
   background-color: var(--accent-color);
   color: var(--primary-color);
