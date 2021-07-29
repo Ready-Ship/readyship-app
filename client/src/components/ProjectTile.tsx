@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import '../stylesheets/components/ProjectTile.css';
 
 interface ProjectTileProps {
-  id: number,
-  title: string
+  id?: number,
+  title?: string
 }
 
 const ProjectTile:FC<ProjectTileProps> = ({ id, title }) => {
