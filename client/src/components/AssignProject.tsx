@@ -7,9 +7,9 @@ interface AssignProjectProps {
   click?: (event: MouseEvent) => void;
 }
 
-const AssignProject:FC<AssignProjectProps> = () => {
+const AssignProject:FC<AssignProjectProps> = ({ click }) => {
   return (
-    <div className="assign-project__card">
+    <div className="assign-project__card" onClick={click}>
       <div className="assign-project__icon">
         +
       </div>

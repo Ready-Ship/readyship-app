@@ -15,7 +15,7 @@ const AssignMemberDrawer:FC<AssignMemberDrawerProps> = ({ open, click }) => {
   return (
     <div className={open ? "assign-member-drawer open" : "assign-member-drawer"}>
       <h1>Assign Project To User(s)</h1>
-      <UserSelector />
+      <UserSelector click={click} />
     </div>
   )
 }

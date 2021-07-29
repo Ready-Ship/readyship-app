@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components Import
 import UserGrid from '../components/UserGrid';
@@ -6,14 +6,17 @@ import AddMember from '../components/AddMember';
 import AssignProject from '../components/AssignProject';
 import AssignMemberDrawer from '../components/AssignMemberDrawer';
 import MemberTile from '../components/MemberTile';
+import Overlay from '../components/Overlay';
 
 import '../stylesheets/screens/ProjectScreen.css'
 
 const ProjectScreen = () => {
+  const [assignMemberToggle, setAssignMemberToggle] = useState(false);
   
   return (
     <>
-    <AssignMemberDrawer />
+    <Overlay show={assignMemberToggle} click={() => setAssignMemberToggle(false)} />
+    <AssignMemberDrawer open={assignMemberToggle} click={() => setAssignMemberToggle(false)} />
     <div className="project-screen">
       <div className="project-screen__container">
 
@@ -53,7 +56,8 @@ const ProjectScreen = () => {
           <h4 className="project__section-heading">Assign Project</h4>
           <div className="project__team-grid-container">
             <UserGrid>
-              <AssignProject />
+              <AssignProject click={() => setAssignMemberToggle(true)} />
+              <MemberTile />
               <MemberTile />
             </UserGrid>
           </div>
