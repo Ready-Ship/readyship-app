@@ -14,7 +14,9 @@ interface UserItemProps {
 const UserItem: FC<UserItemProps> = ({ user, isSelected, onSelect }) => {
   return (
     <div className='user-selector__user-item' style={{ padding: '.5rem 1rem' }}>
-      <p style={{ color: '#fff' }}>{user.name}</p>
+      <div className="user-item__name">
+        <p style={{ color: '#fff' }}>{user.name}</p>
+      </div>
       <button onClick={() => onSelect(!isSelected)}>
         {isSelected ? (
           <i className='fas fa-user-slash'></i>

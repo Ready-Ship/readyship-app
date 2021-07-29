@@ -1,12 +1,12 @@
 import React, { PropsWithChildren, FC } from 'react';
 import '../stylesheets/components/ProjectGrid.css';
 
-// interface CardGridProps<T> {
+// interface ProjectGridProps<T> {
 //   data: T[],
 //   render: (element:T) => React.ReactNode
 // }
 
-// const CardGrid = <T extends any>({ data , render, children }:PropsWithChildren<CardGridProps<T>>) => {
+// const ProjectGrid = <T extends any>({ data , render, children }:PropsWithChildren<ProjectGridProps<T>>) => {
 //   return (
 //     <div className="project-grid">
 //       {children}
@@ -15,7 +15,7 @@ import '../stylesheets/components/ProjectGrid.css';
 //   )
 // }
 
-const CardGrid:FC = ({ children }) => {
+const ProjectGrid:FC = ({ children }) => {
   return (
     <div className="project-grid">
       {children}
@@ -23,4 +23,4 @@ const CardGrid:FC = ({ children }) => {
   )
 }
 
-export default CardGrid;
+export default ProjectGrid;

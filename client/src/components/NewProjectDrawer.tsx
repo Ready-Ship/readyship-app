@@ -25,7 +25,8 @@ const NewProjectDrawer: FC<NewProjectProps> = ({ open, onClose }) => {
       },
       { withCredentials: true }
     );
-    console.log(result.data);
+    setTitle('');
+    setDescription('');
 
     onClose();
   };

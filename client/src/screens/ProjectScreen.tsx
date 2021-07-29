@@ -124,8 +124,15 @@ const ProjectScreen = () => {
         fetchUsers={fetchUsers}
         onSubmit={handleAddUsers}
       />
+
       <div className='project-screen'>
         <div className='project-screen__container'>
+        <div className='project-navigation-container'>
+          <a href="/dashboard" className="proj-screen__back-btn">
+            <i className="fas fa-chevron-left"></i>
+            Go Back
+          </a>
+        </div>
           <div className='project-details-container'>
             <h4 className='project__section-heading'>Project Details</h4>
             <div className='details-columns'>

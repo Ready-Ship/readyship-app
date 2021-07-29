@@ -1,4 +1,5 @@
 .project-tile-container {
+  text-decoration: none;
   min-width: 155px;
   height: 225px;
   padding: .8rem;
@@ -26,10 +27,13 @@
 }
 .project-tile span i{
   font-size: 2.5rem;
-  color: var(--tertiary-color);
+  color: #fff;
 }
 .project-tile-container h4 {
+  text-align: center;
+  text-decoration: none;
   margin-top: .5rem;
   font-weight: 500;
+  color: #000;
 }
 

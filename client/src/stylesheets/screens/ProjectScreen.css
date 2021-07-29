@@ -16,6 +16,32 @@
   justify-content: flex-start;
 }
 
+.project-navigation-container {
+  padding: .3rem;
+  margin-bottom: 2rem;
+  /* border-bottom: 2px solid #e3e3e3; */
+}
+
+.proj-screen__back-btn {
+  width: fit-content;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: var(--accent-color);
+}
+
+.proj-screen__back-btn i {
+  transition: all .2s ease-in-out;
+  margin-right: .5rem;
+  font-size: 1rem;
+}
+
+.proj-screen__back-btn:hover i {
+  transform: translateX(-8px);
+}
+
 .project__section-heading {
   padding: .3rem;
   color: rgb(131, 131, 131);
@@ -49,6 +75,7 @@
 #proj__title-input {
   padding: .5rem;
   color: var(--primary-color);
+  font-family: 'Montserrat','Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 1rem;
   background-color: transparent;
   border: solid 1px var(--primary-color);
