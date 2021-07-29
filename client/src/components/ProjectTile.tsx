@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 import '../stylesheets/components/ProjectTile.css';
 
 interface ProjectTileProps {
+  role?: string
   id?: number,
   title?: string
 }
 
-const ProjectTile:FC<ProjectTileProps> = ({ id, title }) => {
+const ProjectTile:FC<ProjectTileProps> = ({ role, id, title }) => {
   return (
-    <Link to={`/dashboard/${id}`} className="project-tile-container">
+    <Link to={`/dashboard/${id}?role=${role}`} className="project-tile-container">
       <div className="project-tile">
         <span><i className="fas fa-tasks"></i></span>
       </div>

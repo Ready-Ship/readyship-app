@@ -1,36 +1,71 @@
-import React, { FC, MouseEvent } from 'react';
-
+import React, { FC, MouseEvent, useState } from 'react';
+import axios from 'axios';
+import { CONSTANTS } from '../config';
 import '../stylesheets/components/NewProjectDrawer.css';
 
 interface NewProjectProps {
   open: boolean;
-  click: (event: MouseEvent) => void;
+  onClose: () => void;
 }
 
-const NewProjectDrawer:FC<NewProjectProps> = ({ open, click }) => {
+const NewProjectDrawer: FC<NewProjectProps> = ({ open, onClose }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
-  const newProjectSubmitHandler = () => {
-    
-  }
-  
+  const newProjectSubmitHandler = async () => {
+    if (!title || !description) {
+      return;
+    }
+
+    const result = await axios.post(
+      CONSTANTS.API_URL + '/project',
+      {
+        title,
+        description,
+      },
+      { withCredentials: true }
+    );
+    setTitle('');
+    setDescription('');
+
+    onClose();
+  };
+
   return (
-    <div className={open ? "new-proj-drawer open" : "new-proj-drawer"}>
+    <div className={open ? 'new-proj-drawer open' : 'new-proj-drawer'}>
       <h1>Create New Project</h1>
-      <form className="new-proj__container">
-        <div className="title-input form-control-group">
-          <label htmlFor="new-proj__title">Project Title</label>
-          <input id="new-proj__title" type="text" required/>
+      <form className='new-proj__container'>
+        <div className='title-input form-control-group'>
+          <label htmlFor='new-proj__title'>Project Title</label>
+          <input
+            id='new-proj__title'
+            type='text'
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
 
-        <div className="title-input form-control-group">
-          <label htmlFor="new-proj__desc">Project Description</label>
-          <textarea id="new-proj__desc" name="" cols={30} rows={10}></textarea>
+        <div className='title-input form-control-group'>
+          <label htmlFor='new-proj__desc'>Project Description</label>
+          <textarea
+            id='new-proj__desc'
+            name=''
+            cols={30}
+            rows={10}
+            value={description}
+            onChange={(e) => setDescription(e.target.value || '')}
+          ></textarea>
         </div>
-        <button type="submit">Create Project</button>
+        <button type='button' onClick={newProjectSubmitHandler}>
+          Create Project
+        </button>
       </form>
-      <button id="new-proj__cancel" onClick={click}>Cancel</button>
+      <button id='new-proj__cancel' onClick={onClose}>
+        Cancel
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export default NewProjectDrawer;

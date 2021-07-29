@@ -30,6 +30,7 @@
   color: #fff;
 }
 .project-tile-container h4 {
+  text-align: center;
   text-decoration: none;
   margin-top: .5rem;
   font-weight: 500;

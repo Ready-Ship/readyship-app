@@ -27,11 +27,19 @@
   border-radius: 50%;
 }
 
-.member-card__checkbox input {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+.member-card__btn button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  color: #fff;
   cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transition: all .3s ease-in-out;
+}
+.member-card__btn button i {
+  font-size: 1rem;
 }
 
 .member-card__name p {
