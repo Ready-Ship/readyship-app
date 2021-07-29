@@ -11,7 +11,6 @@ const assignProjectCheck = yup.object({
   userIds: yup.array().of(yup.number().required()).required(),
 });
 
-
 export class ProjectController {
   // create new project
   createProject: RequestHandler = async (req, res, next) => {
@@ -32,6 +31,19 @@ export class ProjectController {
     }
   };
 
+  getAvailableUsers: RequestHandler = async (req, res, next) => {
+    try {
+      const users = await Project.getAllAvailableUsers(
+        parseInt(req.query.projectId as string)
+      );
+      res.locals.users = users;
+
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
   // delete proj
   deleteProject: RequestHandler = async (req, res, next) => {
     try {
@@ -45,7 +57,7 @@ export class ProjectController {
 
   getAssignerProjects: RequestHandler = async (req, res, next) => {
     try {
-      const projects = await Project.findAllByAssignerId(res.locals.userId); 
+      const projects = await Project.findAllByAssignerId(res.locals.userId);
       res.locals.projects = projects;
 
       return next();
@@ -56,9 +68,9 @@ export class ProjectController {
 
   getAssigneeProjects: RequestHandler = async (req, res, next) => {
     try {
-      const projects = await Project.findByAssigneeUserId(res.locals.userId)
+      const projects = await Project.findByAssigneeUserId(res.locals.userId);
       res.locals.projects = projects;
-    
+
       return next();
     } catch (err) {
       next(err);
@@ -67,26 +79,26 @@ export class ProjectController {
 
   getAssignerProject: RequestHandler = async (req, res, next) => {
     try {
-      const {projectId} = req.params;
+      const { projectId } = req.params;
 
-      const project = await Project.findById(parseInt(projectId))
+      const project = await Project.findById(parseInt(projectId));
       const users = await Project.getUsersByProjectId(parseInt(projectId));
       res.locals.project = project;
       res.locals.users = users;
-      
+
       return next();
     } catch (err) {
-      next(err)
+      next(err);
     }
   };
 
   getAssigneeProject: RequestHandler = async (req, res, next) => {
     try {
-      const {projectId} = req.params;
-  
+      const { projectId } = req.params;
+
       const project = await Project.findById(parseInt(projectId));
       res.locals.project = project;
-  
+
       return next();
     } catch (err) {
       next(err);
@@ -108,22 +120,23 @@ export class ProjectController {
   unassignUser: RequestHandler = async (req, res, next) => {
     try {
       // grab the project
-      const project = await Project.findById(parseInt(req.params.projectId))
+      const project = await Project.findById(parseInt(req.params.projectId));
 
       // check if the project's creator is the current user
       if (project.creatorid != res.locals.userId) {
         throw Error('you do not have permission to do this');
       }
 
-      await Project.unassignUser((parseInt(req.params.projectId)), req.body.userId ); // dont need to store this cuz nothing is being returned?
+      await Project.unassignUser(
+        parseInt(req.params.projectId),
+        req.body.userId
+      ); // dont need to store this cuz nothing is being returned?
 
       return next();
     } catch (err) {
       next(err);
     }
   };
-
 }
-
 
 export const projectController = new ProjectController();

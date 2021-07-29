@@ -5,13 +5,6 @@ import { User } from '../types';
 
 import '../stylesheets/components/UserSelector.css';
 
-const fetchUsers = async (): Promise<User[]> => {
-  return new Array(50).fill(null).map((_, i) => ({
-    id: i,
-    name: 'user ' + i,
-  }));
-};
-
 interface UserItemProps {
   user: User;
   isSelected: boolean;
@@ -20,10 +13,14 @@ interface UserItemProps {
 
 const UserItem: FC<UserItemProps> = ({ user, isSelected, onSelect }) => {
   return (
-    <div className="user-selector__user-item" style={{ padding: '.5rem 1rem' }}>
+    <div className='user-selector__user-item' style={{ padding: '.5rem 1rem' }}>
       <p style={{ color: '#fff' }}>{user.name}</p>
       <button onClick={() => onSelect(!isSelected)}>
-        {isSelected ? <i className="fas fa-user-slash"></i> : <i className="fas fa-plus"></i>}
+        {isSelected ? (
+          <i className='fas fa-user-slash'></i>
+        ) : (
+          <i className='fas fa-plus'></i>
+        )}
       </button>
     </div>
   );
@@ -31,9 +28,15 @@ const UserItem: FC<UserItemProps> = ({ user, isSelected, onSelect }) => {
 
 interface UserSelectorProps {
   click?: (event: MouseEvent) => void;
+  fetchUsers: () => Promise<User[]>;
+  onSubmit: (users: User[]) => any;
 }
 
-const UserSelector:FC<UserSelectorProps> = ({ click }) => {
+const UserSelector: FC<UserSelectorProps> = ({
+  click,
+  fetchUsers,
+  onSubmit,
+}) => {
   const [users, setUsers] = useState<User[]>([]);
   const [selected, setSelected] = useState<User[]>([]);
 
@@ -49,7 +52,7 @@ const UserSelector:FC<UserSelectorProps> = ({ click }) => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [fetchUsers]);
 
   const selectedIds = useMemo(() => {
     return new Set(selected.map(({ id }) => id));
@@ -63,9 +66,13 @@ const UserSelector:FC<UserSelectorProps> = ({ click }) => {
     }
   };
 
+  if (users.length === 0) {
+    return <p style={{ color: 'white' }}>No users available.</p>;
+  }
+
   return (
-    <div className="selector-container">
-      <div className="users-container">
+    <div className='selector-container'>
+      <div className='users-container'>
         {users.map((user) => (
           <UserItem
             key={user.id}
@@ -75,18 +82,30 @@ const UserSelector:FC<UserSelectorProps> = ({ click }) => {
           />
         ))}
       </div>
-      {selected.length >= 1 ? <button className="select-submit-btn">Confirm Selection</button> : null}
-      {selected.length >= 1 ? <div className="selected-container">
-        {selected.map((user) => (
-          <div className="selected-user"
-            key={user.id}
-            onClick={() => toggleSelect(user, false)}
-          >
-            <p>{user.name}</p>
-          </div>
-        ))}
-      </div> : null}
-      <button className="selector__cancel-btn" onClick={click}><i className="fas fa-chevron-left"></i> Cancel</button>
+      {selected.length >= 1 ? (
+        <button
+          className='select-submit-btn'
+          onClick={() => onSubmit(selected)}
+        >
+          Confirm Selection
+        </button>
+      ) : null}
+      {selected.length >= 1 ? (
+        <div className='selected-container'>
+          {selected.map((user) => (
+            <div
+              className='selected-user'
+              key={user.id}
+              onClick={() => toggleSelect(user, false)}
+            >
+              <p>{user.name}</p>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <button className='selector__cancel-btn' onClick={click}>
+        <i className='fas fa-chevron-left'></i> Cancel
+      </button>
     </div>
   );
 };

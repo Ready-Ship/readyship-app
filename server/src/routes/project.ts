@@ -11,6 +11,12 @@ router.post('/', ensureAuth, projectController.createProject, (_req, res) => {
   });
 });
 
+router.get('/user', projectController.getAvailableUsers, (req, res) => {
+  res.status(200).json({
+    users: res.locals.users,
+  });
+});
+
 // GET /projects?role=assigner
 // GET /projects?role=assignee
 
@@ -64,8 +70,8 @@ router.get(
   projectController.getAssigneeProject,
   (req, res) => {
     res.status(200).json({
-      project: res.locals.project
-    })
+      project: res.locals.project,
+    });
   }
 );
 
