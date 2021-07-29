@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS "account" (
 CREATE TABLE IF NOT EXISTS "project" (
   id SERIAL PRIMARY KEY,
   creatorid INT NOT NULL REFERENCES account (id) ON DELETE CASCADE,
-  title VARCHAR(255) NOT NULL
+  title VARCHAR(255) NOT NULL, 
+  description VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "project_has_assignee" (

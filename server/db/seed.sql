@@ -8,9 +8,9 @@ VALUES
 
 INSERT INTO 
 project 
-(creatorid, title) 
+(creatorid, title, description) 
 VALUES 
-((SELECT id from account LIMIT 1), 'test project');
+((SELECT id from account LIMIT 1), 'test project', 'a description');
 
 INSERT INTO
 task

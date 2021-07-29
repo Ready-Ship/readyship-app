@@ -6,6 +6,7 @@ import { accountRouter, projectRouter, organizationRouter } from './routes';
 export const startServer = async () => {
   const db = DBDataSource.instance;
   await db.connect();
+  await db.create();
   await db.test();
 
   const app = express();

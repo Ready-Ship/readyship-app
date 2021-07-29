@@ -5,32 +5,39 @@ import { ensureAuth } from '../middlewares';
 
 const router = Router();
 
-router.get('/', ensureAuth, projectController.findAllProjects);
+router.post(
+  '/', 
+  ensureAuth, 
+  projectController.createProject, 
+  (req, res) => {
+    res.status(200).json({
+      project: res.locals.project,
+    })
+  }
+);
 
-router.get('/:projectId/assignee'); // /project/:projectId
+router.get(
+  '/', 
+  ensureAuth, 
+  projectController.findAllProjects, 
+  (req, res) => {
+    res.status(200).json({
+      projects: res.locals.projects,
+    })
+  }
+);
 
-router.post('/:projectId/assign');
+
+
+router.post(
+  '/:projectId/assign',
+  ensureAuth,
+  projectController.assignUser,
+  (req, res) => {
+    res.status(200).json({
+      user: res.locals.userId, //userId or user?
+    })
+  }
+); 
 
 export const projectRouter = router;
-
-// module.exports = app => {
-//   // const projects = require('../controllers/projectController.controller.ts'); //update controller path
-
-//   // create new project
-//   app.post('/projects', projectController.create);
-
-//   // get all projects
-//   app.get('/projects', projectController.findAll);
-
-//   // get a single project
-//   app.get('/projects/:projectsId', projectController.findOne);
-
-//   // update a project (do we need this?)
-//   app.put('/projects/:projectsId', projectController.update);
-
-//   // delete a project vid id
-//   app.delete('/projects/:projectsId', projectController.delete);
-
-// }
-
-//do we need an app.listen?
