@@ -8,10 +8,45 @@
 }
 
 .project-screen__container {
-  width: 900px;
+  width: 1080px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: var(--tertiary-color);
 }
+
+.project__section-heading {
+  padding: .3rem;
+  color: rgb(131, 131, 131);
+  font-weight: 600;
+  border-bottom: solid 2px #e3e3e3;
+}
+
+.details-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.project__details h3 {
+  margin-bottom: .3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+
+}
+
+.proj-form-ctrl-grp {
+  display: flex;
+  flex-direction: column;
+}
+
+.project__team-container {
+  margin: 2.5rem 0;
+}
+
+.project__team-grid-container {
+  padding: 1rem;
+}
+
+
