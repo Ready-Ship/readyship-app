@@ -62,7 +62,11 @@ router.get(
   '/:projectId/assignee',
   ensureAuth,
   projectController.getAssigneeProject,
-  (req, res) => {}
+  (req, res) => {
+    res.status(200).json({
+      project: res.locals.project
+    })
+  }
 );
 
 router.post(
@@ -76,7 +80,7 @@ router.post(
   }
 );
 
-router.get(
+router.post(
   '/:projectId/unassign',
   ensureAuth,
   projectController.unassignUser,

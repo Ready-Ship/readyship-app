@@ -115,7 +115,7 @@ export class ProjectController {
         throw Error('you do not have permission to do this');
       }
 
-      await Project.unassignUser((parseInt(req.params.projectId)), req.body.userid ); // dont need to store this cuz nothing is being returned?
+      await Project.unassignUser((parseInt(req.params.projectId)), req.body.userId ); // dont need to store this cuz nothing is being returned?
 
       return next();
     } catch (err) {

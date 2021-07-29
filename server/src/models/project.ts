@@ -71,7 +71,7 @@ export class ProjectModel {
 
   // get users for a particular project
   async getUsersByProjectId(projectId: number) {
-    const query = 'SELECT u.* from account as u JOIN project_has_assignee AS pha WHERE pha.projectid = $1';
+    const query = 'SELECT u.* FROM account AS u JOIN project_has_assignee AS pha ON u.id = pha.userid WHERE pha.projectid = $1';
     const result = await this.client.query(query, [projectId]);
     return result.rows;
   }
