@@ -8,6 +8,10 @@ interface NewProjectProps {
 }
 
 const NewProjectDrawer:FC<NewProjectProps> = ({ open, click }) => {
+
+  const newProjectSubmitHandler = () => {
+    
+  }
   
   return (
     <div className={open ? "new-proj-drawer open" : "new-proj-drawer"}>

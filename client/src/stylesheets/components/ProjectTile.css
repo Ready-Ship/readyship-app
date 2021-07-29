@@ -8,11 +8,11 @@
   align-items: center;
   border-radius: 15px;
   cursor: pointer;
-  transition: all .4s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 .project-tile-container:hover {
   background-color: var(--tertiary-color);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 }
 .project-tile {
   height: 130px;

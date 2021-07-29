@@ -10,7 +10,7 @@ import {
   USER_SIGNOUT_FAIL,
   UserDispatchTypes,
   USER_AUTHENTICATE_SUCCESS,
-} from '../constants/userConstants';
+} from '../constants/authConstants';
 import { User } from '../../types';
 
 export interface AuthState {

@@ -1,4 +1,4 @@
-import { UserInfo } from './userConstants';
+import { UserInfo } from './authConstants';
 
 // create a PROJECT
 export const CREATE_PROJECT_REQUEST = 'CREATE_PROJECT_REQUEST';
