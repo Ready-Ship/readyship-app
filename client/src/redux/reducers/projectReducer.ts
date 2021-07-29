@@ -24,7 +24,7 @@ import {
   Project
 } from "../constants/projectConstants";
 
-export interface DefaultProjectState {
+export interface ProjectState {
   loading: boolean,
   projectList?: Project[],
   assignedProjectList?: Project[]
@@ -32,11 +32,11 @@ export interface DefaultProjectState {
   id?: number
 }
 
-const initialState: DefaultProjectState = {
+const initialState: ProjectState = {
   loading: false
 };
 
-export const createProjectReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const createProjectReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case CREATE_PROJECT_REQUEST:
       return { loading: true };
@@ -52,7 +52,7 @@ export const createProjectReducer = (state: DefaultProjectState = initialState, 
   }
 };
      
-export const updateProjectReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const updateProjectReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case UPDATE_PROJECT_REQUEST:
       return { loading: true };
@@ -68,7 +68,7 @@ export const updateProjectReducer = (state: DefaultProjectState = initialState, 
   }
 };
 
-export const deleteProjectReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const deleteProjectReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case DELETE_PROJECT_REQUEST:
       return { loading: true };
@@ -84,7 +84,7 @@ export const deleteProjectReducer = (state: DefaultProjectState = initialState, 
   }
 };
 
-export const userProjectsReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const userProjectsReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case USER_PROJECTS_REQUEST:
       return { loading: true };
@@ -100,7 +100,7 @@ export const userProjectsReducer = (state: DefaultProjectState = initialState, a
   }
 };
 
-export const assignedProjectsReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const assignedProjectsReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case ASSIGNED_PROJECTS_REQUEST:
       return { loading: true };
@@ -116,7 +116,7 @@ export const assignedProjectsReducer = (state: DefaultProjectState = initialStat
   }
 };
 
-export const assignerProjectReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const assignerProjectReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case ASSIGNER_SINGLE_PROJECT_REQUEST:
       return { loading: true };
@@ -133,7 +133,7 @@ export const assignerProjectReducer = (state: DefaultProjectState = initialState
 };
 
 
-export const assigneeProjectReducer = (state: DefaultProjectState = initialState, action: ProjectsDispatchTypes) => {
+export const assigneeProjectReducer = (state: ProjectState = initialState, action: ProjectsDispatchTypes) => {
   switch (action.type) {
     case ASSIGNEE_SINGLE_PROJECT_REQUEST:
       return { loading: true };

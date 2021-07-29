@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 // App Css Import
 import './stylesheets/App.css';
@@ -8,7 +9,6 @@ import './stylesheets/App.css';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import DashboardScreen from './screens/DashboardScreen';
-
 import ProjectScreen from './screens/ProjectScreen';
 import TestScreen from './screens/TestScreen';
 
@@ -16,7 +16,6 @@ import TestScreen from './screens/TestScreen';
 import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import Overlay from './components/Overlay';
-import { useDispatch } from 'react-redux';
 
 import * as authActions from './redux/actions/authActions';
 
@@ -57,11 +56,9 @@ const App: FC = () => {
           <Route exact path='/dashboard'>
             <DashboardScreen />
           </Route>
-
           <Route exact path='/dashboard/:projectId'>
             <ProjectScreen />
            </Route>
-          
           <Route path='/test'>
             <TestScreen />
           </Route>
