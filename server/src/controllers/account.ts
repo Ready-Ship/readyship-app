@@ -20,9 +20,8 @@ export class AccountController {
       const { email, password, name } = await signUpCheck.validate(req.body);
 
       const hash = await bcrypt.hash(password, 10);
-      await Account.create({ email, password: hash, name });
+      const account = await Account.create({ email, password: hash, name });
 
-      const account = await Account.findByEmail(email);
       res.locals.account = { ...account };
       delete res.locals.account.password;
 
@@ -46,6 +45,18 @@ export class AccountController {
       }
 
       res.locals.account = { ...account };
+      delete res.locals.account.password;
+
+      return next();
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  authenticate: RequestHandler = async (req, res, next) => {
+    try {
+      const account = await Account.findById(res.locals.userId);
+      res.locals.account = account;
       delete res.locals.account.password;
 
       return next();

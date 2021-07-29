@@ -1,28 +1,30 @@
+import { User } from '../../types';
+
 // USER SIGNUP ACTION TYPE
 export const USER_SIGNUP_REQUEST = 'USER_SIGNUP_REQUEST';
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
 export const USER_SIGNUP_FAIL = 'USER_SIGNUP_FAIL';
 
 export type UserInfo = {
-  name: string
-  email: string,
-  password: string,
-}
+  name: string;
+  email: string;
+  password: string;
+};
 
 export interface UserSignupRequest {
-  type: typeof USER_SIGNUP_REQUEST
+  type: typeof USER_SIGNUP_REQUEST;
 }
 
 export interface UserSignupSuccess {
   type: typeof USER_SIGNUP_SUCCESS;
   payload: {
-    userInfo: UserInfo
+    userInfo: UserInfo;
   };
 }
 
 export interface UserSignupFail {
   type: typeof USER_SIGNUP_FAIL;
-  payload: any
+  payload: any;
 }
 
 // USER LOGIN ACTION TYPE
@@ -37,13 +39,13 @@ export interface UserLoginRequest {
 export interface UserLoginSuccess {
   type: typeof USER_LOGIN_SUCCESS;
   payload: {
-    userInfo: UserInfo
+    userInfo: UserInfo;
   };
 }
 
 export interface UserLoginFail {
   type: typeof USER_LOGIN_FAIL;
-  payload: any
+  payload: any;
 }
 
 // USER SIGNOUT ACTION TYPE
@@ -61,12 +63,25 @@ export interface UserSignoutSuccess {
 
 export interface UserSignoutFail {
   type: typeof USER_SIGNOUT_FAIL;
-  payload: any
+  payload: any;
 }
 
-export type UserDispatchTypes = 
-UserSignupRequest | UserSignupSuccess | UserSignupFail | 
-UserLoginRequest | UserLoginSuccess | UserLoginFail |
-UserSignoutRequest | UserSignoutSuccess | UserSignoutFail;
+// USER AUTHENTICATE
+export const USER_AUTHENTICATE_SUCCESS = 'USER_AUTHENTICATE_SUCCESS';
 
+export interface UserAuthenticateSuccess {
+  type: typeof USER_AUTHENTICATE_SUCCESS;
+  payload: User;
+}
 
+export type UserDispatchTypes =
+  | UserSignupRequest
+  | UserSignupSuccess
+  | UserSignupFail
+  | UserLoginRequest
+  | UserLoginSuccess
+  | UserLoginFail
+  | UserSignoutRequest
+  | UserSignoutSuccess
+  | UserSignoutFail
+  | UserAuthenticateSuccess;

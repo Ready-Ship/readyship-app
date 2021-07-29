@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { accountController } from '../controllers';
+import { ensureAuth } from '../middlewares';
 
 const router = Router();
 
@@ -35,5 +36,16 @@ router.post('/signout', async (req, res, next) => {
     next(err);
   }
 });
+
+router.post(
+  '/authenticate',
+  ensureAuth,
+  accountController.authenticate,
+  (req, res) => {
+    res.status(200).json({
+      account: res.locals.account,
+    });
+  }
+);
 
 export const accountRouter = router;

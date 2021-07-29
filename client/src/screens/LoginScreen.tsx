@@ -1,61 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch, connect } from 'react-redux';
-
-import logo from '../assets/readyship-logo--white-06.svg'
-
-// Import Css
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { RootState } from '../redux/reducers/rootReducer';
+import * as authActions from '../redux/actions/authActions';
 import '../stylesheets/screens/LoginScreen.css';
 
-// Import signin action from userActions.js
-// import { signin } from '../redux/actions/userActions';
-
 const LoginScreen = () => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  // // const userSignin = useSelector(state => state.userSignin);
-  // // const { loading, userInfo, error } = userSignin;
-  // const loading = props.loading;
-  // const userInfo = props.email;
-  // const error = props.error;
+  useEffect(() => {
+    if (authState.user) {
+      history.push('/dashboard');
+    }
+  }, [authState.user, history]);
 
-  // const history = useHistory()
-
-
-  // const loginSubmitHandler = (e) => {
-  //   e.preventDefault();
-  //   // dispatch(signin(email, password));
-  //   signin(email, password, dispatch);
-  // };
-
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     // history.push(`/dashboard/${userInfo.name}`);
-  //     history.push(`/dashboard`);
-  //   }
-  // }, [userInfo]);
+  const login = () => {
+    if (email && password) {
+      dispatch(authActions.login(email, password));
+    }
+  };
 
   return (
-    <div className="login__screen">
-      <div className="loginScreen__form-container">
+    <div className='login__screen'>
+      <div className='loginScreen__form-container'>
         <h1>Log In</h1>
-        {/* {userInfo ? <Redirect to='/dashboard'/> : null} */}
-        <form onSubmit={undefined}>
+        <form>
           <div>
-            <input name="email" placeholder='Email' id="email" type="email" autoComplete="off" required />
+            <input
+              name='email'
+              placeholder='Email'
+              id='email'
+              type='email'
+              autoComplete='off'
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div>
-            <input name="password" placeholder='Password' id="password" type="password" required />
+            <input
+              name='password'
+              placeholder='Password'
+              id='password'
+              type='password'
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <div>
-            <button id="login__btn" type="submit"> Log In </button>
-            <span id="signup-redirect">Not a User? <Link to='/signup' id="login-form__signup-btn">Sign Up</Link> </span>
+            <button id='login__btn' type='button' onClick={login}>
+              {'Log In'}
+            </button>
+            <span id='signup-redirect'>
+              {'Not a User? '}
+              <Link to='/signup' id='login-form__signup-btn'>
+                Sign Up
+              </Link>
+            </span>
           </div>
-          <div className="signup__message">
-          </div>
+          <div className='signup__message'></div>
         </form>
       </div>
     </div>
@@ -63,4 +72,3 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
-

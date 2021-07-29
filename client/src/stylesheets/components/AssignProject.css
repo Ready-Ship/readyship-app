@@ -1,0 +1,33 @@
+.assign-project__card {
+  width: 180px;
+  height: 70px;
+  padding: .8rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 2fr;
+  background-color: var(--tertiary-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.assign-project__card:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.assign-project__icon {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  background-color: #fff;
+  border: 2px dashed var(--primary-color);
+   border-radius: 50%;
+}
+
+.assign-project__text h4 {
+  font-weight: 600;
+}

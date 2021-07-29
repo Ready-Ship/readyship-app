@@ -1,0 +1,101 @@
+.new-proj-drawer {
+  position: fixed;
+  width: 40%;
+  height: 100%;
+  top: 0;
+  left: 140%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  transform: translateX(-100%);
+  transition: all 500ms ease-out;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  z-index: 210;
+}
+
+.new-proj-drawer.open {
+  left: 100%;
+}
+.new-proj-drawer__container {
+  width: 100%;
+}
+
+.new-proj-drawer h1 {
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.new-proj__container {
+  height: 50%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-control-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control-group label {
+  margin-bottom: .5rem;
+  color: var(--tertiary-color);
+  font-size: 1.2rem;
+}
+
+#new-proj__title {
+  padding: .8rem;
+  color: #fff;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+}
+
+
+#new-proj__desc {
+  padding: .8rem;
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Montserrat';
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+}
+
+#new-proj__title:focus,
+#new-proj__desc:focus {
+  outline: none;
+  border: 1px solid var(--accent-color);
+}
+
+.new-proj__container button {
+  padding: .8rem 0;
+  color: var(--primary-color);
+  font-size: 1rem;
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.new-proj__container button:hover {
+  color: var(--accent-color);
+  background-color: transparent;
+}
+
+#new-proj__cancel {
+  width: fit-content;
+  margin-top: 1rem;
+  padding: .5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--accent-color);
+  font-size: 1rem;
+  cursor: pointer;
+}

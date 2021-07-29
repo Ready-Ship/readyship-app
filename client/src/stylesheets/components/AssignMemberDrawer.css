@@ -1,0 +1,28 @@
+.assign-member-drawer {
+  position: fixed;
+  width: 40%;
+  height: 100%;
+  top: 0;
+  left: 140%;
+  padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--primary-color);
+  transform: translateX(-100%);
+  transition: all 500ms ease-out;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  z-index: 210;
+  overflow: auto;
+}
+
+.assign-member-drawer.open {
+  left: 100%;
+}
+
+.assign-member-drawer h1 {
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}

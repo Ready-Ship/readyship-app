@@ -1,0 +1,99 @@
+.project-screen {
+  width: 100%;
+  height: 100vh;
+  padding: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.project-screen__container {
+  width: 1080px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project__section-heading {
+  padding: .3rem;
+  color: rgb(131, 131, 131);
+  font-weight: 600;
+  border-bottom: solid 2px #e3e3e3;
+}
+
+.details-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.project__details h3 {
+  margin-bottom: .3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.proj-form-ctrl-grp {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.proj-form-ctrl-grp label {
+  margin-bottom: .3rem;
+}
+
+#proj__title-input {
+  padding: .5rem;
+  color: var(--primary-color);
+  font-size: 1rem;
+  background-color: transparent;
+  border: solid 1px var(--primary-color);
+  border-radius: 8px;
+}
+
+#proj__desc-input {
+  padding: .5rem;
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-family: 'Montserrat';
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+}
+
+#proj__title-input:focus,
+#proj__desc-input:focus {
+  outline: none;
+  border: 1px solid var(--accent-color);
+}
+
+.project__update-form button {
+  padding: .8rem;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.project__update-form button:hover {
+  background-color: transparent;
+  color: var(--accent-color);
+}
+
+.project__team-container {
+  margin: 2.5rem 0;
+}
+
+.project__team-grid-container {
+  padding: 1rem;
+}
+
+
